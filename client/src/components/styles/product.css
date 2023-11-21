@@ -1,0 +1,10 @@
+#product img {
+  width: 250px;
+  height: 300px;
+}
+
+#product {
+  text-align: center;
+  font-size: small;
+  width: 300px;
+}
