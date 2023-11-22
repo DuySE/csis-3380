@@ -1,4 +1,4 @@
-const Modal = ({ title, children, show, toggle }) => {
+const Modal = ({ title, children, show, toggle, submit }) => {
   const style = {
     display: show ? 'block' : 'none'
   };
@@ -19,7 +19,7 @@ const Modal = ({ title, children, show, toggle }) => {
             <button type='button' className='btn btn-light' onClick={toggle}>
               Close
             </button>
-            <button type='button' className='btn btn-warning' onClick={toggle}>
+            <button type='button' className='btn btn-warning' onClick={submit}>
               Save
             </button>
           </div>

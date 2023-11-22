@@ -31,6 +31,7 @@ const upload = multer({ storage });
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static('uploads'));
 
 // Get products in a specific category
 app.get('/products/category/:category', async (req, res) => {
@@ -42,10 +43,10 @@ app.get('/products/category/:category', async (req, res) => {
 });
 
 // Add new product
-app.post('/products', async (req, res) => {
+app.post('/products', upload.single('file'), async (req, res) => {
   try {
     const { title, price, category } = req.body;
-    const image = req.file.buffer;
+    const image = req.file.path;
     const foundCategory = await Category.findOne({ name: category });
     const result = await new Product({ title, price, image, category: foundCategory._id }).save();
     res.status(201).send(result);
