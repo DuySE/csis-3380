@@ -2,7 +2,7 @@ import './styles/product.css';
 
 const Product = ({ product }) => (
   <div id='product' className='border rounded p-2 shadow'>
-    <img src={product.image} alt={product.title} />
+    <img src={`data:image/jpeg;base64,${Buffer.from(`${product.image}`).toString('base64')}`} alt={product.title} />
     <p>{product.title}</p>
     <p>${product.price}</p>
   </div>

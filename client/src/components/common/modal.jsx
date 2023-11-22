@@ -13,7 +13,7 @@ const Modal = ({ title, children, show, toggle }) => {
             </button>
           </div>
           <div className='modal-body'>
-            <p>{children}</p>
+            {children}
           </div>
           <div className='modal-footer'>
             <button type='button' className='btn btn-light' onClick={toggle}>

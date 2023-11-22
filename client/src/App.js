@@ -13,8 +13,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/men' element={<ProductList category={'men\'s clothing'} />} />
-        <Route path='/women' element={<ProductList category={'women\'s clothing'} />} />
+        <Route path='/men' element={<ProductList category='men' />} />
+        <Route path='/women' element={<ProductList category='women' />} />
       </Routes>
     </div>
   );

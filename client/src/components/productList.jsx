@@ -14,7 +14,7 @@ const ProductList = ({ category }) => {
   useEffect(() => {
     async function getProductsByCategory() {
       setLoading(true);
-      await fetch(`http://localhost:5000/${category}`)
+      await fetch(`http://localhost:5000/products/category/${category}`)
         .then((products) => products.json())
         .then((products) => {
           setProducts(products);
@@ -28,15 +28,15 @@ const ProductList = ({ category }) => {
     <>
       <button className='btn btn-warning m-3' onClick={toggleModal}>Add</button>
       <Modal title='Add new product' show={showModal} toggle={toggleModal}>
-        <form action='/add' method='post' enctype='multipart/form-data'>
+        <form action='/add' method='post' encType='multipart/form-data'>
           <input type='text' className='form-control mb-3' id='title' placeholder='Title' />
           <input type='number' className='form-control mb-3' id='price' step='0.01' min='0' placeholder='Price' />
-          <input type='file' class='form-control-file' id='file' />
+          <input type='file' className='form-control-file' id='file' accept='image/*' />
         </form>
       </Modal>
       <div id='product-list'>
         {loading && <Spinner />}
-        {products.map((product) => <Product key={product.id} product={product} />)}
+        {products.map((product) => <Product key={product._id} product={product} />)}
       </div>
     </>
   )
