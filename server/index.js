@@ -77,7 +77,7 @@ app.delete('/products/:_id', async (req, res) => {
 app.put('/products/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, price } = req.body;
+    const { title, price, category } = req.body;
     const image = req.file.path;
     const foundCategory = await Category.findOne({ name: category });
     const result = await Product.findOneAndUpdate({ id }, {
@@ -85,7 +85,7 @@ app.put('/products/:id', async (req, res) => {
       price,
       image,
       category: foundCategory._id
-    }, { new: true, upsert: true });
+    }, { new: false, upsert: false });
     if (result) res.status(201).send(result);
   } catch (err) {
     res.status(500).json({ error: 'Internal Server Error' });

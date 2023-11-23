@@ -3,12 +3,12 @@ import { FaPen, FaTrash } from 'react-icons/fa6';
 
 const SERVER_HOST = 'http://localhost:5000';
 
-const Product = ({ product, onDelete }) => (
+const Product = ({ product, onDelete, onEdit }) => (
   <div id='product' className='border rounded p-2 shadow'>
     <img src={`${SERVER_HOST}/${product.image}`} alt={product.title} />
     <p>{product.title}</p>
     <p>${product.price}</p>
-    <FaPen size={20} cursor='pointer' style={{ 'marginRight': '15px' }} />
+    <FaPen size={20} cursor='pointer' style={{ 'marginRight': '15px' }} onClick={() => onEdit()} />
     <FaTrash size={20} cursor='pointer' color='red' onClick={() => onDelete()} />
   </div>
 );
