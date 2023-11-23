@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import fs from 'fs';
 import multer from 'multer';
 import Product from './models/product.js';
 import Category from './models/category.js';
@@ -49,6 +50,23 @@ app.post('/products', upload.single('file'), async (req, res) => {
     const image = req.file.path;
     const foundCategory = await Category.findOne({ name: category });
     const result = await new Product({ title, price, image, category: foundCategory._id }).save();
+    if (result) res.status(201).send(result);
+  } catch (err) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Delete a product
+app.delete('/products/:_id', async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const result = await Product.findOneAndDelete({ _id });
+    if (result) {
+      console.log(result.image);
+      if (fs.existsSync(result.image)) fs.unlink(result.image, err => {
+        if (err) res.status(404).send('File not found!');
+      });
+    }
     res.status(201).send(result);
   } catch (err) {
     res.status(500).json({ error: 'Internal Server Error' });
@@ -57,16 +75,22 @@ app.post('/products', upload.single('file'), async (req, res) => {
 
 // Edit a product
 app.put('/products/:id', async (req, res) => {
-  const { id } = req.params;
-  const { title, price } = req.body;
-  const image = req.file.path;
-  const product = await Product.findOneAndUpdate({ id }, {
-    title,
-    price,
-    image
-  }, { new: true, upsert: true });
+  try {
+    const { id } = req.params;
+    const { title, price } = req.body;
+    const image = req.file.path;
+    const foundCategory = await Category.findOne({ name: category });
+    const result = await Product.findOneAndUpdate({ id }, {
+      title,
+      price,
+      image,
+      category: foundCategory._id
+    }, { new: true, upsert: true });
+    if (result) res.status(201).send(result);
+  } catch (err) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
-
 
 mongoose
   .connect(DATABASE_URL)
