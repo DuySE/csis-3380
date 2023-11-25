@@ -1,4 +1,4 @@
-const Modal = ({ title, children, show, onToggle, onAdd }) => {
+const Modal = ({ title, children, show, onToggle, onSave }) => {
   const style = {
     display: show ? 'block' : 'none'
   };
@@ -8,7 +8,7 @@ const Modal = ({ title, children, show, onToggle, onAdd }) => {
         <div className='modal-content'>
           <div className='modal-header'>
             <h5 className='modal-title'>{title}</h5>
-            <button type='button' className='btn btn-light' onClick={onToggle}>
+            <button type='button' className='btn btn-light' onClick={() => onToggle()}>
               <span>&times;</span>
             </button>
           </div>
@@ -16,10 +16,10 @@ const Modal = ({ title, children, show, onToggle, onAdd }) => {
             {children}
           </div>
           <div className='modal-footer'>
-            <button type='button' className='btn btn-light' onClick={onToggle}>
+            <button type='button' className='btn btn-light' onClick={() => onToggle()}>
               Close
             </button>
-            <button type='button' className='btn btn-warning' onClick={() => onAdd()}>
+            <button type='button' className='btn btn-warning' onClick={() => onSave()}>
               Save
             </button>
           </div>

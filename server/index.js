@@ -62,7 +62,6 @@ app.delete('/products/:_id', async (req, res) => {
     const { _id } = req.params;
     const result = await Product.findOneAndDelete({ _id });
     if (result) {
-      console.log(result.image);
       if (fs.existsSync(result.image)) fs.unlink(result.image, err => {
         if (err) res.status(404).send('File not found!');
       });
@@ -74,18 +73,16 @@ app.delete('/products/:_id', async (req, res) => {
 });
 
 // Edit a product
-app.put('/products/:id', async (req, res) => {
+app.put('/products/:_id', upload.single('file'), async (req, res) => {
   try {
-    const { id } = req.params;
+    const { _id } = req.params;
     const { title, price, category } = req.body;
-    const image = req.file.path;
     const foundCategory = await Category.findOne({ name: category });
-    const result = await Product.findOneAndUpdate({ id }, {
+    const result = await Product.findOneAndUpdate({ _id }, {
       title,
       price,
-      image,
       category: foundCategory._id
-    }, { new: false, upsert: false });
+    }, { new: true, upsert: true });
     if (result) res.status(201).send(result);
   } catch (err) {
     res.status(500).json({ error: 'Internal Server Error' });

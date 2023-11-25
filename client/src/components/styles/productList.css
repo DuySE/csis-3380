@@ -2,11 +2,16 @@ button {
   margin: 25px 0 25px 0;
 }
 
+#preview {
+  width: 100px;
+  height: 100px;
+}
+
 #product-list {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
   flex-wrap: wrap;
   min-height: 100vh;
+  margin-left: 15px;
   gap: 1em;
 }

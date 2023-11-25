@@ -8,7 +8,7 @@ const Product = ({ product, onDelete, onEdit }) => (
     <img src={`${SERVER_HOST}/${product.image}`} alt={product.title} />
     <p>{product.title}</p>
     <p>${product.price}</p>
-    <FaPen size={20} cursor='pointer' style={{ 'marginRight': '15px' }} onClick={() => onEdit()} />
+    <FaPen size={20} cursor='pointer' style={{ 'marginRight': '15px' }} onClick={() => onEdit(product)} />
     <FaTrash size={20} cursor='pointer' color='red' onClick={() => onDelete()} />
   </div>
 );
