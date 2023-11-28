@@ -26,7 +26,7 @@ const ProductList = ({ category }) => {
   useEffect(() => {
     const getProductsByCategory = async () => {
       setLoading(true);
-      await fetch(`${SERVER_HOST}/products/category/${category}`)
+      await fetch(`${SERVER_HOST}/categories/${category}`)
         .then((products) => products.json())
         .then((products) => {
           setProducts(products);
