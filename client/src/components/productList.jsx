@@ -6,6 +6,7 @@ import Default from '../images/default.png';
 import './styles/productList.css';
 
 const ProductList = ({ category }) => {
+  const username = localStorage.getItem('username');
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
@@ -69,7 +70,11 @@ const ProductList = ({ category }) => {
   };
 
   const handleSave = () => {
-    if (product) editProduct(product);
+    const title = document.getElementById('title').value;
+    const price = document.getElementById('price').value;
+    if (!title) alert('Name cannot be empty');
+    else if (!price) alert('Price cannot be empty');
+    else if (product) editProduct(product);
     else addProduct();
   };
 
@@ -125,10 +130,10 @@ const ProductList = ({ category }) => {
   const modalTitle = product ? 'Edit a product' : 'Add new product';
   return (
     <>
-      <button className='btn btn-warning m-3' cursor='pointer' onClick={() => toggleModal()}>Add</button>
+      {username && <button className='btn btn-warning m-3' cursor='pointer' onClick={() => toggleModal()}>Add</button>}
       <Modal title={modalTitle} show={showModal} onToggle={toggleModal} onSave={handleSave}>
         <form name='form' action='/products' method='post' encType='multipart/form-data'>
-          <input type='text' name='title' className='form-control mb-3' id='title' placeholder='Title' value={title} onChange={e => setTitle(e.target.value)} />
+          <input type='text' name='title' className='form-control mb-3' id='title' placeholder='Title' value={title} onChange={e => setTitle(e.target.value)} />          
           <input type='number' name='number' className='form-control mb-3' id='price' step='0.01' min='0' placeholder='Price' value={price} onChange={e => setPrice(e.target.value)} />
           {!product && (
             <>
@@ -140,7 +145,11 @@ const ProductList = ({ category }) => {
       </Modal>
       <div id='product-list'>
         {loading && <Spinner />}
-        {products.map((product) => <Product key={product._id} product={product} onDelete={() => deleteProduct(product)} onEdit={() => toggleModal(product)} />)}
+        {
+          products.map(
+            product => <Product key={product._id} product={product} onDelete={() => deleteProduct(product)} onEdit={() => toggleModal(product)} />
+          )
+        }
       </div>
     </>
   )

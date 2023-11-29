@@ -1,10 +1,10 @@
 #product img {
-  width: 250px;
+  width: 280px;
   height: 300px;
+  border-radius: 5px;
 }
 
 #product {
-  text-align: center;
-  font-size: small;
+  text-align: center;  
   width: 300px;
 }

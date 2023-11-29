@@ -78,7 +78,7 @@ const Home = () => {
           {loading && <Spinner />}
           {products.map(product => (
             <>
-              <div className='product'>
+              <div key={product._id} className='product'>
                 <img src={product.image} alt={product.title} />
                 <p className='name'>{product.title}</p>
                 <p className='price'>${product.price}</p>
