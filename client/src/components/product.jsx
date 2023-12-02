@@ -1,5 +1,5 @@
 import './styles/product.css';
-import { FaPen, FaTrash } from 'react-icons/fa6';
+import { FaRegEdit, FaTrash } from 'react-icons/fa';
 
 const SERVER_HOST = 'http://localhost:5000';
 
@@ -13,7 +13,7 @@ const Product = ({ product, onDelete, onEdit }) => {
       {username &&
         (
           <>
-            <FaPen size={20} cursor='pointer' style={{ 'marginRight': '15px' }} onClick={() => onEdit(product)} />
+            <FaRegEdit size={20} cursor='pointer' style={{ 'marginRight': '15px' }} onClick={() => onEdit(product)} />
             <FaTrash size={20} cursor='pointer' color='red' onClick={() => onDelete()} />
           </>
         )}
