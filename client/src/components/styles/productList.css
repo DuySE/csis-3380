@@ -13,5 +13,10 @@ button {
   flex-wrap: wrap;
   min-height: 100vh;
   margin-left: 15px;
-  gap: 1em;
+  gap: 0.6em;
+}
+
+select,
+label {
+  margin: 20px 20px;
 }

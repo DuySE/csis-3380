@@ -22,12 +22,10 @@ const ProductList = ({ category }) => {
     } else reset();
     setShowModal(!showModal); // show/hide modal
   }
-  const SERVER_HOST = 'http://localhost:5000';
-
   useEffect(() => {
     const getProductsByCategory = async () => {
       setLoading(true);
-      await fetch(`${SERVER_HOST}/categories/${category}`)
+      await fetch(`/categories/${category}`)
         .then((products) => products.json())
         .then((products) => {
           setProducts(products);
@@ -51,7 +49,7 @@ const ProductList = ({ category }) => {
     formData.append('file', file);
     formData.append('category', category);
     setLoading(true);
-    await fetch(`${SERVER_HOST}/products`, {
+    await fetch('/products', {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
@@ -81,7 +79,7 @@ const ProductList = ({ category }) => {
   // Delete a product
   const deleteProduct = async product => {
     setLoading(true);
-    await fetch(`${SERVER_HOST}/products/${product._id}`, {
+    await fetch(`/products/${product._id}`, {
       method: 'DELETE',
       mode: 'cors',
       cache: 'no-cache'
@@ -99,7 +97,7 @@ const ProductList = ({ category }) => {
     formData.append('price', price);
     formData.append('category', category);
     setLoading(true);
-    await fetch(`${SERVER_HOST}/products/${product._id}`, {
+    await fetch(`/products/${product._id}`, {
       method: 'PUT',
       mode: 'cors',
       cache: 'no-cache',
@@ -127,13 +125,26 @@ const ProductList = ({ category }) => {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
+  const sortByPrice = () => {
+    const select = document.getElementById('prices');
+    const sortedProducts = [...products].sort((a, b) => {
+      if (select.value === '-1') return b.price - a.price;
+      else return a.price - b.price;
+    });
+    setProducts(sortedProducts);
+  };
   const modalTitle = product ? 'Edit a product' : 'Add new product';
   return (
     <>
+      <label htmlFor='price'>Price</label>
+      <select id='prices' onChange={sortByPrice}>
+        <option value='1'>Lowest to Highest</option>
+        <option value='-1'>Highest to Lowest</option>
+      </select>
       {username && <button className='btn btn-warning m-3' cursor='pointer' onClick={() => toggleModal()}>Add</button>}
       <Modal title={modalTitle} show={showModal} onToggle={toggleModal} onSave={handleSave}>
         <form name='form' action='/products' method='post' encType='multipart/form-data'>
-          <input type='text' name='title' className='form-control mb-3' id='title' placeholder='Title' value={title} onChange={e => setTitle(e.target.value)} />          
+          <input type='text' name='title' className='form-control mb-3' id='title' placeholder='Title' value={title} onChange={e => setTitle(e.target.value)} />
           <input type='number' name='number' className='form-control mb-3' id='price' step='0.01' min='0' placeholder='Price' value={price} onChange={e => setPrice(e.target.value)} />
           {!product && (
             <>

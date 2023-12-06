@@ -77,13 +77,11 @@ const Home = () => {
         <div id='new'>
           {loading && <Spinner />}
           {products.map(product => (
-            <>
-              <div key={product._id} className='product'>
-                <img src={product.image} alt={product.title} />
-                <p className='name'>{product.title}</p>
-                <p className='price'>${product.price}</p>
-              </div>
-            </>
+            <div key={product.id} className='product'>
+              <img src={product.image} alt={product.title} />
+              <p className='name'>{product.title}</p>
+              <p className='price'>${product.price}</p>
+            </div>
           ))}
         </div>
       </div>

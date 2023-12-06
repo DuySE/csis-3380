@@ -1,14 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo.jpg';
 import './styles/navBar.css';
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const username = localStorage.getItem('username');
   const auth = () => {
     if (username) {
       localStorage.removeItem('username');
-      window.location.href='/';
+      navigate('/');
     }
-    else window.location.href='/login';
+    else navigate('/login');
   }
   return (
     <nav>

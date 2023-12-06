@@ -1,13 +1,11 @@
 import './styles/product.css';
 import { FaRegEdit, FaTrash } from 'react-icons/fa';
 
-const SERVER_HOST = 'http://localhost:5000';
-
 const Product = ({ product, onDelete, onEdit }) => {
   const username = localStorage.getItem('username');
   return (
     <div id='product' className='border rounded p-2 shadow'>
-      <img src={`${SERVER_HOST}/${product.image}`} alt={product.title} />
+      <img src={`/${product.image}`} alt={product.title} />
       <p>{product.title}</p>
       <p>${product.price}</p>
       {username &&
