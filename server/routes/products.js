@@ -10,6 +10,9 @@ const storage = multer.diskStorage({
     fileSize: 1024 * 1024 * 5 // 5MB Limit
   },
   destination: (req, file, cb) => {
+    if (!fs.existsSync('uploads')) {
+      fs.mkdirSync('uploads');
+    }
     cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {

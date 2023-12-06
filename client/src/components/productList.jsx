@@ -14,7 +14,7 @@ const ProductList = ({ category }) => {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [showModal, setShowModal] = useState(false);
-
+  const SERVER_HOST = 'http://localhost:5000';
   const toggleModal = product => {
     setProduct(product);
     if (product) {
@@ -26,7 +26,7 @@ const ProductList = ({ category }) => {
   useEffect(() => {
     const getProductsByCategory = async () => {
       setLoading(true);
-      await fetch(`/categories/${category}`)
+      await fetch(`${SERVER_HOST}/categories/${category}`)
         .then((products) => products.json())
         .then((products) => {
           setProducts(products);
@@ -50,7 +50,7 @@ const ProductList = ({ category }) => {
     formData.append('file', file);
     formData.append('category', category);
     setLoading(true);
-    await fetch('/products', {
+    await fetch(`${SERVER_HOST}/products`, {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
@@ -80,7 +80,7 @@ const ProductList = ({ category }) => {
   // Delete a product
   const deleteProduct = async product => {
     setLoading(true);
-    await fetch(`/products/${product._id}`, {
+    await fetch(`${SERVER_HOST}/products/${product._id}`, {
       method: 'DELETE',
       mode: 'cors',
       cache: 'no-cache'
@@ -98,7 +98,7 @@ const ProductList = ({ category }) => {
     formData.append('price', price);
     formData.append('category', category);
     setLoading(true);
-    await fetch(`/products/${product._id}`, {
+    await fetch(`${SERVER_HOST}/products/${product._id}`, {
       method: 'PUT',
       mode: 'cors',
       cache: 'no-cache',

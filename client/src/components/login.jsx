@@ -7,10 +7,11 @@ import './styles/login.css';
 const Login = () => {
   const [data, setData] = useState({});
   const [error, setError] = useState('');
+  const SERVER_HOST = 'http://localhost:5000';
   const navigate = useNavigate();
   const submit = async e => {
     e.preventDefault();
-    await fetch('/users/login', {
+    await fetch(`${SERVER_HOST}/users/login`, {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
@@ -38,6 +39,12 @@ const Login = () => {
   return (
     <Form method='POST' button='Log In' onSubmit={e => submit(e)} onChange={e => handleChange(e)}>
       {error && <p id='error'><IoMdWarning color='red' id='warning' />{error}</p>}
+      <br />
+      <small>
+        For testing purpose:<br />
+        Username: <em>admin</em><br />
+        Password: <em>admin</em><br />
+      </small>
     </Form>
   );
 };
