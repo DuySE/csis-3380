@@ -37,12 +37,7 @@ const Login = () => {
   };
   return (
     <Form method='POST' button='Log In' onSubmit={e => submit(e)} onChange={e => handleChange(e)}>
-      <small className='form-text text-muted'>
-        <p>For testing purposes:</p>
-        <p><b>Username:</b> admin</p>
-        <p><b>Password:</b> admin</p>
-      </small>
-      {error && <p id='error'><IoMdWarning color='red' style={{ 'marginRight': '10px' }} />{error}</p>}
+      {error && <p id='error'><IoMdWarning color='red' id='warning' />{error}</p>}
     </Form>
   );
 };

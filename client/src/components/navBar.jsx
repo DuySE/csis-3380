@@ -33,9 +33,6 @@ const NavBar = () => {
           <a href='/women'>WOMEN</a>
         </div>
         <div className='menu'>
-          <a href='/contact'>CONTACT US</a>
-        </div>
-        <div className='menu'>
           <a href='#/' onClick={auth}>{username ? 'LOG OUT' : 'LOG IN'}</a>
         </div>
       </div>

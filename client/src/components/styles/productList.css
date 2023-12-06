@@ -20,3 +20,8 @@ select,
 label {
   margin: 20px 20px;
 }
+
+#add {
+  color: rgb(246, 148, 29);
+  margin-left: 20px;
+}

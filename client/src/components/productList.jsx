@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { IoIosAddCircle } from 'react-icons/io';
 import Product from './product';
 import Spinner from './common/spinner';
 import Modal from './common/modal';
@@ -141,7 +142,7 @@ const ProductList = ({ category }) => {
         <option value='1'>Lowest to Highest</option>
         <option value='-1'>Highest to Lowest</option>
       </select>
-      {username && <button className='btn btn-warning m-3' cursor='pointer' onClick={() => toggleModal()}>Add</button>}
+      {username && <IoIosAddCircle size={30} cursor='pointer' onClick={() => toggleModal()} id='add' />}
       <Modal title={modalTitle} show={showModal} onToggle={toggleModal} onSave={handleSave}>
         <form name='form' action='/products' method='post' encType='multipart/form-data'>
           <input type='text' name='title' className='form-control mb-3' id='title' placeholder='Title' value={title} onChange={e => setTitle(e.target.value)} />
