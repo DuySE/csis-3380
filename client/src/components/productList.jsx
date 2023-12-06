@@ -137,11 +137,15 @@ const ProductList = ({ category }) => {
   const modalTitle = product ? 'Edit a product' : 'Add new product';
   return (
     <>
-      <label htmlFor='price'>Price</label>
-      <select id='prices' onChange={sortByPrice}>
-        <option value='1'>Lowest to Highest</option>
-        <option value='-1'>Highest to Lowest</option>
-      </select>
+      {products.length > 0 && (
+        <>
+          <label htmlFor='price'>Price</label>
+          <select id='prices' onChange={sortByPrice}>
+            <option value='1'>Lowest to Highest</option>
+            <option value='-1'>Highest to Lowest</option>
+          </select>
+        </>
+      )}
       {username && <IoIosAddCircle size={30} cursor='pointer' onClick={() => toggleModal()} id='add' />}
       <Modal title={modalTitle} show={showModal} onToggle={toggleModal} onSave={handleSave}>
         <form name='form' action='/products' method='post' encType='multipart/form-data'>
