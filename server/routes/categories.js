@@ -5,7 +5,7 @@ import Category from '../models/category.js';
 const router = express.Router();
 
 // Get products in a specific category
-router.get('/:name', async (req, res) => {
+router.get('/:name', async (req, res) => { // /:name <=> pass men to :name /men
   try {
     const { name } = req.params;
     const foundCategory = await Category.findOne({ name });

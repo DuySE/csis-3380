@@ -1,4 +1,3 @@
-import Banner from './banner';
 import Look1 from '../images/products/home/look1.jpg';
 import Look2 from '../images/products/home/look2.jpg';
 import Look3 from '../images/products/home/look3.jpg';
@@ -30,10 +29,9 @@ const Home = () => {
 
   return (
     <>
-      <Banner />
       <div id='bestsellers'>
         <h1>SALE</h1>
-        <p className='slogan'>Discover best-sellers of Gangster</p>
+        <p className='slogan'>Discover best-sellers</p>
         <div id='products'>
           <div className='product'>
             <img src={Clothing} alt='Clothing' />
